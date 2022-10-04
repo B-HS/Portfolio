@@ -88,6 +88,7 @@
 </script>
 <style scoped lang="sass">
     .navigation
+        width: 100%
         .navigation-title
             position: absolute
             left: 50%

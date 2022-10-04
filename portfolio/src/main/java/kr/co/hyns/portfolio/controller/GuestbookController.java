@@ -22,20 +22,18 @@ public class GuestbookController {
 
     @RequestMapping(value = "/list", method = RequestMethod.POST, consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HashMap<String, Object>> sendList(@RequestBody Integer pageNum){
-        
         return new ResponseEntity<>(gser.getGuestbookList(pageNum), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<guestbookDTO> addGuestbook(@RequestBody guestbookDTO dto){
-        
         return new ResponseEntity<>(gser.writeGuestbook(dto), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.POST, consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Boolean> modifyGuestbook(@RequestBody guestbookDTO dto){
         return new ResponseEntity<>(gser.modifyGuestbook(dto), HttpStatus.OK);
-    } // 넣을 자리가 없음, 넣을자리 생기면 써먹음
+    }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST, consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Boolean> removeGuestbook(@RequestBody guestbookDTO dto){

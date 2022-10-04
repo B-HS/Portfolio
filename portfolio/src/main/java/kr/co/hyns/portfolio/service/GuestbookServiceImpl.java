@@ -22,11 +22,9 @@ import kr.co.hyns.portfolio.entity.Qguestbook;
 import kr.co.hyns.portfolio.entity.guestbook;
 import kr.co.hyns.portfolio.repository.GuestbookRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 
 @Service
 @RequiredArgsConstructor
-@Log4j2
 public class GuestbookServiceImpl implements GuestbookService{
     private final GuestbookRepository grepo;
     private final PasswordEncoder encoder;
@@ -44,8 +42,8 @@ public class GuestbookServiceImpl implements GuestbookService{
     }
 
     @Override
-    public HashMap<String, Object> getGuestbookList(Integer pageNum) {
-        Pageable pageable = PageRequest.of(pageNum-1, 2);
+    public HashMap<String, Object> getGuestbookList(Integer pageNum) {        
+        Pageable pageable = PageRequest.of(pageNum-1, 10);
         Qguestbook qguestbook = Qguestbook.guestbook;
         List<guestbook> result = queryFactory
         .select(qguestbook)
@@ -83,9 +81,6 @@ public class GuestbookServiceImpl implements GuestbookService{
 
     @Override
     public Boolean removeGuestbook(guestbookDTO dto) {
-        log.info("-------------------------");
-        log.info(dto);
-        log.info("-------------------------");
         Qguestbook qguestbook = Qguestbook.guestbook;
         Optional<guestbook> result = Optional.ofNullable(queryFactory.select(qguestbook).from(qguestbook).where(qguestbook.gid.eq(dto.getGid())).fetchOne());
         if(result.isPresent() && encoder.matches(dto.getPassword(), result.get().getPassword())){

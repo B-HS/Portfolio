@@ -26,6 +26,9 @@
             font-family: 'Ubuntu', sans-serif
         hr
             opacity: 0.7
+        input
+            outline: none
+            padding: 0.3rem
     #app
         a, li, ul, ol
             text-decoration: none
@@ -35,9 +38,15 @@
             margin: 0
 
     .contentarea
+        display: flex
+        flex-direction: column
+        align-items: center
         min-height: 100vh
+        min-width: 450px
         background: black
         .contentarea-context
+            max-width: 1920px
+            min-width: 400px
             display: flex
             flex-direction: column
             align-items: center
