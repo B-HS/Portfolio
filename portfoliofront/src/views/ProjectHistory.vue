@@ -39,8 +39,8 @@ import router from '@/router';
 <style scoped lang="sass">
     .contentarea-context
         display: grid
-        grid-template-columns: repeat(auto-fit, minmax(495px, 1fr))
-        flex-direction: column
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr))
+        justify-content: center
         gap: 1rem
         width: 75%                    
 </style>

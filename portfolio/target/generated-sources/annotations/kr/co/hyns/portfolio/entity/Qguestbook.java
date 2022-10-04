@@ -28,6 +28,8 @@ public class Qguestbook extends EntityPathBase<guestbook> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> moddate = _super.moddate;
 
+    public final BooleanPath open = createBoolean("open");
+
     public final StringPath password = createString("password");
 
     //inherited

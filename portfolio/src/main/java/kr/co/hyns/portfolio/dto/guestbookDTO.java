@@ -12,6 +12,7 @@ public class guestbookDTO {
     private String username;
     private String password;
     private String context;
+    private Boolean open;
     private LocalDateTime regdate;
     private LocalDateTime moddate;
 }

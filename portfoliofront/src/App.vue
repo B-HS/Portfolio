@@ -21,6 +21,8 @@
         img
             max-height: 100%
             max-width: 100%
+        h5
+            font-size: 1.2rem
         h6
             font-weight: 300
             font-family: 'Ubuntu', sans-serif
@@ -29,6 +31,7 @@
         input
             outline: none
             padding: 0.3rem
+            border-radius: 0
     #app
         a, li, ul, ol
             text-decoration: none
@@ -46,7 +49,7 @@
         background: black
         .contentarea-context
             max-width: 1920px
-            min-width: 400px
+            min-width: 450px
             display: flex
             flex-direction: column
             align-items: center
@@ -60,9 +63,12 @@
             img
                 border-radius: 10rem
         .contentarea-context__text
+            .contentarea-context__text__name
+                font-size: 2rem
             .contentarea-context__text__etc
                 display: flex
                 justify-content: space-between
+                gap: 3rem
                 .contentarea-context__text__etc__icon
                     display: flex
                     gap: 0.5rem

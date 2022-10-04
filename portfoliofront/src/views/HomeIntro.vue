@@ -160,6 +160,7 @@
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr))
             gap: 2rem
             box-sizing: border-box
+            overflow: hidden
             .contentarea-context__collapse
                 font-size: 0.75rem
                 height: 1.25rem
@@ -172,6 +173,10 @@
                 .contentarea-context__collapse-title
                     display: flex
                     justify-content: space-between
+                    position: relative
+                    i
+                        position: absolute
+                        right: 1rem
 
                 .contentarea-context__collapse-context
                     line-height: 1.5rem

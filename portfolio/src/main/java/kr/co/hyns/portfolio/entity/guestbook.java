@@ -34,5 +34,8 @@ public class guestbook extends DateEntity{
     @Column
     private String context;
 
+    @Column
+    private Boolean open;
+
 
 }

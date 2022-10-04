@@ -89,6 +89,9 @@
 <style scoped lang="sass">
     .navigation
         width: 100%
+        position: sticky
+        top: 0
+        z-index: 1000
         .navigation-title
             position: absolute
             left: 50%

@@ -2,10 +2,20 @@
     <div class="guestbooksection">
         <div class="guestbook-inputsection-sticky">
             <div class="guestbook-inputsection" v-if="!body.fixmode">
-                <div class="guestbook-inputsection__guestinfo"><span>작성자</span><input type="text" v-model="body.username" /> <span>비밀번호</span><input type="password" v-model="body.password" /><h5> <i class="bi bi-check-circle"></i> 댓글을 클릭하면 수정과 삭제가 가능합니다</h5></div>
+                <div class="guestbook-inputsection__guestinfo">
+                    <span>작성자</span><input type="text" v-model="body.username" />
+                    <span>비밀번호</span><input type="password" v-model="body.password" />
+                    <h5> 
+                        <i class="bi bi-check-circle"></i> 댓글을 클릭하면 수정과 삭제가 가능합니다
+                    </h5>
+                </div>
                 <div class="guestbook-inputsection__context">
                     <textarea v-model="body.context"></textarea>
                     <button @click="addBook()" src="#">입력</button>
+                </div>
+                <div class="guestbook-inputsection__functions">
+                    <input type="checkbox" name="open" v-model="body.open">
+                    <span>비밀글</span>
                 </div>
             </div>
             <div class="guestbook-inputsection" v-if="body.fixmode">
@@ -20,16 +30,20 @@
                     <textarea v-model="body.context"></textarea>
                     <button @click="addBook()">수정</button>
                 </div>
+                <div class="guestbook-inputsection__functions">
+                    <input type="checkbox" name="open" v-model="body.open">
+                    <span>비밀글</span>
+                </div>
             </div>
         </div>
         <div ref="area" class="guestboot-context-area">
             <div class="guestboot-context-area__element" v-for="(info, idx) in tableState.info" :key="(info, idx)" @click="modify(info, idx)" :id="info.gid">
                 <div class="guestboot-context-area__element__userinfo">
-                    <span>{{idx + "." + info.username }}</span>
+                    <span>{{(idx+1) + "." + info.username }}</span>
                     <h6>{{ getTimeFromJavaDate(info.regdate) }}</h6>
                 </div>
-
-                <span class="guestboot-context-area__element__usercomment">{{ info.context }}</span>
+                <span class="guestboot-context-area__element__usercomment" v-if="info.open==true">{{info.context}}</span>
+                <span class="guestboot-context-area__element__usercomment" v-if="info.open==false" style="opacity:0.5;">관리자만 볼 수 있는 글입니다</span>
             </div>
         </div>
     </div>
@@ -53,6 +67,7 @@
         username: null,
         password: null,
         context: null,
+        open:false,
         fixmode: false,
     });
 
@@ -62,9 +77,13 @@
     });
 
     function modify(info, idx) {
+        if (info.open==false) {
+            body.context = "수정이 불가능한 글입니다"
+            return
+        }
         body.fixmode = true;
         body.username = info.username;
-        body.context = info.context;
+        body.context = info.open==true?info.context:"";
         body.password = "";
         body.gid = info.gid;
         for (let i = 0; i < tableState.info.length; i++) {
@@ -74,10 +93,12 @@
     }
 
     function addBook() {
+        body.open = !body.open
         axios.post("./api/add", body, { headers }).then(function (res) {
             body.username = "";
             body.password = "";
             body.context = "";
+            body.open = "";
             tableState.info = [];
             tableState.currentPage = [0];
             tableState.size = [];
@@ -140,7 +161,6 @@
     function windowSize() {
         if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
             tableState.currentPage[0] += 1;
-            console.log("여기가문제인가         ", tableState.currentPage);
             getBookList(tableState.currentPage[0]);
         }
     }
@@ -150,14 +170,15 @@
 </script>
 <style lang="sass" scoped>
     .guestbook-inputsection-sticky
+        display: flex
+        justify-content: center
         width: 100%
         height: auto
-        top:0
+        top:2.5rem
         position: sticky
-        padding: 3rem 0rem
-        background: black
+        padding: 0rem 0rem 3rem 0rem
         z-index: 10
-        box-sizing: border-box
+        box-sizing: border-box        
     .guestbooksection
         display: flex
         flex-direction: column
@@ -179,14 +200,23 @@
             padding: 1rem
             box-sizing: border-box
             border: 1px solid white
-
+            background-color: black
+            .guestbook-inputsection__functions
+                font-size: 0.75rem
+                display: flex
+                gap: 0.5rem
+                align-content: center
             .guestbook-inputsection__guestinfo
                 display: flex
                 align-items: center
+                justify-content: flex-start
                 gap: 1rem
+                font-size: 0.75rem
+                h5
+                    font-size: inherit
                 input
-                    width: 20%
-                    height: 1.5rem
+                    width: 15%
+                    height: 1rem
             .guestbook-inputsection__context
                 display: flex
                 gap: 1rem
@@ -198,9 +228,6 @@
                     transition: 0.2s ease-in-out all
                     &:active, &:hover
                         background-color: #333
-
-
-
                 textarea
                     resize: none
                     width: 95%

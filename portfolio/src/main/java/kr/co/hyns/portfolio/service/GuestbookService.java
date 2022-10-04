@@ -19,6 +19,7 @@ public interface GuestbookService {
         .gid(entity.getGid())
         .username(entity.getUsername())
         .context(entity.getContext())
+        .open(entity.getOpen())
         .regdate(entity.getRegdate())
         .moddate(entity.getModdate())
         .build();
@@ -31,6 +32,7 @@ public interface GuestbookService {
         .username(dto.getUsername())
         .context(dto.getContext())
         .password(dto.getPassword())
+        .open(dto.getOpen())
         .build();
         return entity;
     }

@@ -14,12 +14,11 @@
         box-sizing: border-box
         padding: 1rem
         width: 100%
-        height: 100%
         hr
             margin: 0.75rem 0rem
         p
             line-height: 2rem
     .contentarea-context__box__img
         img
-            width: 900%
+            width: 100%
 </style>
