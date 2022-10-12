@@ -2,6 +2,7 @@
 *.properties
 node_modules
 /dist
+target
 
 
 # local env files
