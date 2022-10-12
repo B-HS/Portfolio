@@ -138,7 +138,7 @@
             return `${Math.round(calculated / 31536000)}년 전`;
         }
     }
-    function remove(gid, pwd) {
+    function remove() {
         axios.post("./api/delete", deleteState, { headers }).then(function (res) {
             if (res.data == false) {
                 alert("삭제에 실패하였습니다");
