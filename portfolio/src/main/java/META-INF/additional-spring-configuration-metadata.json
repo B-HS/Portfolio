@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "kr.co.hyns.portfolio.password",
+  "type": "java.lang.String",
+  "description": "Password for write project article"
+}]}

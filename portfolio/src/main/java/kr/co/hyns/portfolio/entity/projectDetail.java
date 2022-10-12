@@ -18,11 +18,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 public class projectDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
