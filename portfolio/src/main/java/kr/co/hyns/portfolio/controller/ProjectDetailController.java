@@ -11,17 +11,25 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.hyns.portfolio.dto.projectDetailDTO;
+import lombok.extern.log4j.Log4j2;
 
 @RestController
-@RequestMapping("projects")
+@RequestMapping("/projects")
+@Log4j2
 public class ProjectDetailController {
     @Value("${kr.co.hyns.portfolio.password}")
     private String passwd;
+
+    @RequestMapping(value = "/writecheck", method = RequestMethod.POST, consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> writeCheck(@RequestBody String wpass){
+        return passchecking(wpass);
+    }
 
     @RequestMapping(value = "/list", method = RequestMethod.POST, consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<projectDetailDTO>> projectList(Long pid){
@@ -37,6 +45,16 @@ public class ProjectDetailController {
             return new ResponseEntity<>(FileCopyUtils.copyToByteArray(imgFile), headers,HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    public ResponseEntity<Boolean> passchecking(String wpass){
+        log.info(wpass);
+        if (passwd.equals(wpass.substring(0, wpass.length()-1))) {
+            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+        } else{
+            return new ResponseEntity<Boolean>(false, HttpStatus.OK);
         }
     }
 }
