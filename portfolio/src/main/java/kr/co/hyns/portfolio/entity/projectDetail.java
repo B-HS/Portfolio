@@ -1,7 +1,6 @@
 package kr.co.hyns.portfolio.entity;
 
 import java.nio.charset.Charset;
-import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,7 +31,7 @@ public class projectDetail {
     private String title;
 
     @Column
-    private LocalDate duration;
+    private String duration;
 
     @Column
     private String stack;

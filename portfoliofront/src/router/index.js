@@ -3,6 +3,7 @@ import HomeIntro from "@/views/HomeIntro.vue"
 import ProjectList from "@/views/ProjectHistory.vue"
 import GuestBoard from "@/views/GuestBook.vue"
 import ProjectDetail from "@/views/ReadProject.vue"
+import WriteProject from "@/views/WriteProject.vue"
 const routes = [
   {
     path: '/',
@@ -23,6 +24,11 @@ const routes = [
     path: '/read',
     name: 'read',
     component: ProjectDetail
+  },
+  {
+    path: '/write',
+    name: 'write',
+    component: WriteProject
   }
 
 ]

@@ -17,14 +17,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.hyns.portfolio.dto.projectDetailDTO;
+import kr.co.hyns.portfolio.service.ProjectDetailService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @RestController
 @RequestMapping("/projects")
+@RequiredArgsConstructor
 @Log4j2
 public class ProjectDetailController {
     @Value("${kr.co.hyns.portfolio.password}")
     private String passwd;
+    private final ProjectDetailService pdser;
 
     @RequestMapping(value = "/writecheck", method = RequestMethod.POST, consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Boolean> writeCheck(@RequestBody String wpass){
@@ -45,6 +49,16 @@ public class ProjectDetailController {
             return new ResponseEntity<>(FileCopyUtils.copyToByteArray(imgFile), headers,HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/write", method = RequestMethod.POST, consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Long> writeArticle(@RequestBody projectDetailDTO dto){
+        Long result = pdser.writeArticle(dto);
+        if (result>0){
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(-1L, HttpStatus.BAD_REQUEST);
         }
     }
 

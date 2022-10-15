@@ -6,7 +6,7 @@ import kr.co.hyns.portfolio.entity.projectDetail;
 
 public interface ProjectDetailService {
     projectDetailDTO getList(Long pid);
-    boolean writeArticle(projectDetailDTO dto);
+    Long writeArticle(projectDetailDTO dto);
 
     default projectDetailDTO toDTO(projectDetail entity){
         return projectDetailDTO.builder()

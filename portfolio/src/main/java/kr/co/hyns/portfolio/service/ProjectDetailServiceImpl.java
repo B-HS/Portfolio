@@ -9,11 +9,13 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import kr.co.hyns.portfolio.dto.projectDetailDTO;
 import kr.co.hyns.portfolio.entity.QprojectDetail;
+import kr.co.hyns.portfolio.repository.ProjectDetailRepository;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class ProjectDetailServiceImpl implements ProjectDetailService{
+    private final ProjectDetailRepository pdrepo;
     private final JPAQueryFactory factory;
     @PersistenceContext
     EntityManager em;
@@ -25,8 +27,8 @@ public class ProjectDetailServiceImpl implements ProjectDetailService{
     }
 
     @Override
-    public boolean writeArticle(projectDetailDTO dto) {
+    public Long writeArticle(projectDetailDTO dto) {
         
-        return false;
+        return pdrepo.save(toEntity(dto)).getPid();
     }
 }

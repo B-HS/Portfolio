@@ -32,6 +32,14 @@
             outline: none
             padding: 0.3rem
             border-radius: 0
+            border: 0
+        button
+            border-radius: 0
+            outline: none
+            border: none
+            background: white
+            color: black
+
     #app
         a, li, ul, ol
             text-decoration: none
