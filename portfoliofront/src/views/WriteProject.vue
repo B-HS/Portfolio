@@ -1,36 +1,52 @@
 <template>
     <div class="contentarea-context">
-        <span @click="router.push('./projects')"><i class="bi bi-arrow-left"></i> 목록으로 돌아가기</span>
+        <div class="contentarea-context__btns">
+            <span @click="router.push('./projects')"><i class="bi bi-arrow-left"></i> 목록으로 돌아가기</span>
+        </div>
         <div class="contentarea-context__innerline">
             <div class="contentarea-context__section">
                 <label class="contentarea-context__section__label" for="title">프로젝트명</label>
-                <input type="text" v-model="state.title">
+                <input type="text" v-model="state.title" />
             </div>
             <div class="contentarea-context__section">
                 <label class="contentarea-context__section__label" for="title">제작소요 기간</label>
-                <input type="text" v-model="state.duration">
+                <input type="text" v-model="state.duration" />
             </div>
             <div class="contentarea-context__section">
                 <label class="contentarea-context__section__label" for="title">사용된 기술</label>
-                <input type="text" v-model="state.stack">
+                <input type="text" v-model="state.stack" />
             </div>
             <div class="contentarea-context__section">
                 <label class="contentarea-context__section__label" for="title">느낀점</label>
                 <textarea v-model="state.context"></textarea>
             </div>
         </div>
+        <CheckModal :which="true" :articleInfo="state"></CheckModal>
     </div>
 </template>
 <script setup>
-    import { reactive } from "vue"
     import router from "@/router";
+    import { reactive, ref } from "vue";
+    import CheckModal from "@/components/CheckModal.vue";
+    
+    let writeModal = ref(null);
     let state = reactive({
-        title : "",
+        title: "",
         duration: "",
         stack: "",
-        context:""
+        context: "",
+    });
 
-    })
+
+    function showModal(status) {
+        writeModal.value.style.visibility = `${status}`;
+    }
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key == "Escape") {
+            showModal("hidden");
+        }
+    });
 </script>
 <style lang="sass" scoped>
     .contentarea-context
@@ -40,6 +56,9 @@
         span
             text-align: left
             cursor: pointer
+        .contentarea-context__btns
+            display: flex
+            justify-content: space-between
 
         .contentarea-context__innerline
             width: 100%
@@ -61,9 +80,10 @@
                         resize: none
                         border: none
                         border-radius: none
+                        padding: 0.25rem
                         &:focus
                            outline: none
-                           padding: 0.25rem 
+                           
 
                 .contentarea-context__section__label
                     width: 10%
