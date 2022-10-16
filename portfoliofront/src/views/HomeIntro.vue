@@ -19,7 +19,7 @@
             </div>
         </section>
         <section class="contentarea-context__box">
-            <h1 class="bi bi-person-fill">소개</h1>
+            <h1 class="bi bi-person-fill"> 소개</h1>
             <hr />
             <p>
                 코딩, 무언가 하나 해결 될 때의 그 짜릿함을 끊을 수가 없습니다 <br />
@@ -27,15 +27,15 @@
             </p>
         </section>
         <section class="contentarea-context__box">
-            <h1 class="bi bi-stack">주요 기술</h1>
+            <h1 class="bi bi-stack"> 주요 기술</h1>
             <hr />
             <div class="contentarea-context__box__list">
                 <div ref="java" class="contentarea-context__collapse" @click="collapse(0)">
                     <div class="contentarea-context__collapse-title">
                         <span>
                             - JAVA
-                            <h6>ㄴ Spring boot</h6></span
-                        >
+                            <h6>ㄴ Spring boot</h6>
+                        </span>
                         <i ref="javaBtn" class="bi bi-caret-down-square-fill"></i>
                     </div>
                     <br />
@@ -49,8 +49,8 @@
                     <div ref="vue" class="contentarea-context__collapse-title">
                         <span>
                             - Vue
-                            <h6>ㄴ Javascript, HTML, CSS</h6></span
-                        >
+                            <h6>ㄴ Javascript, HTML, CSS</h6>
+                        </span>
                         <i ref="vueBtn" class="bi bi-caret-down-square-fill"></i>
                     </div>
                     <br />
@@ -64,8 +64,8 @@
                     <div class="contentarea-context__collapse-title">
                         <span>
                             - Python
-                            <h6>ㄴ Algorithm</h6></span
-                        >
+                            <h6>ㄴ Algorithm</h6>
+                        </span>
                         <i ref="pythonBtn" class="bi bi-caret-down-square-fill"></i>
                     </div>
                     <br />
@@ -79,7 +79,7 @@
         </section>
 
         <section class="contentarea-context__box">
-            <h1 class="bi bi-three-dots">기타 경험 기술</h1>
+            <h1 class="bi bi-three-dots"> 기타 경험 기술</h1>
             <hr />
             <div class="contentarea-context__box__list_etc">
                 <span>MySQL</span>

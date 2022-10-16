@@ -25,7 +25,11 @@
     const props = defineProps(["which", "articleInfo"])
 
     const header = {
-        "Content-Type": "application/json; charset=utf-8",
+        "Content-Type": "application/json;",
+    };
+    
+    const headerForMulti= {
+        "Content-Type": "multipart/form-data;charset=UTF-8"
     };
 
     let state = reactive({
@@ -36,9 +40,17 @@
     function write() {
         if(props.which){
             axios.post("./api/projects/writecheck", state.passwd, { header }).then(function (res) {
+                let form = new FormData()
+                for (const key in props.articleInfo) {
+                    if (Object.hasOwnProperty.call(props.articleInfo, key)) {
+                        const element = props.articleInfo[key];
+                        form.set(`${key}`, element)
+                    }
+                }  
+                console.log(form);
             if (res.data == true) {
-                axios.post("./api/projects/write", props.articleInfo, { header }).then(function(res){
-                    res.data>0?router.go(-1):alert("글쓰기 실패")
+                axios.post("./api/projects/write", form, { headerForMulti }).then(function(res){
+                    res.data>0?router.push("./projects"):alert("글쓰기 실패")
                 })
             }
         });
@@ -67,10 +79,10 @@
         position: absolute
         left: 0
         top: 0
-        width: 100vw
-        height: 100vh
+        width: 99%
+        height: 100%
     .writecheckmodal
-        position: absolute
+        position: fixed
         display: flex
         justify-content: center
         align-items: center
@@ -83,7 +95,7 @@
         opacity: 0.2
 
     .writecheckmodal__body
-        position: absolute
+        position: fixed
         display: flex
         gap: 1rem
         padding: 2rem
@@ -110,10 +122,15 @@
                 width: 15%
 
     .contentarea-context__writebtn
-        position: absolute
+        position: fixed
         font-size: 3rem
-        right: 2rem
-        bottom: 2rem
+        right: 3rem
+        top: 5rem
+        cursor: pointer
+        color: black
+        transition: all ease-in-out 0.3s
+        &:hover
+            color: white
     .contentarea-context__write
         cursor: pointer
         margin-top: 3rem

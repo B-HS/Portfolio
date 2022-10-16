@@ -1,28 +1,30 @@
 <template>
     <div class="contentarea-context">
-        <span @click="router.push('./projects')"><i class="bi bi-arrow-left"></i> 목록으로 돌아가기</span>
         <div class="contentarea-context__innerline">
             <div class="contentarea-context__section">
                 <label class="contentarea-context__section__label" for="title">프로젝트명</label>
-                <span class="contextarea-context__section__input" id="title">안녕하세요</span>
+                <span class="contextarea-context__section__input" id="title">{{props.info.title}}</span>
             </div>
             <div class="contentarea-context__section">
                 <label class="contentarea-context__section__label" for="title">제작소요 기간</label>
-                <span class="contextarea-context__section__input" id="title">2달</span>
+                <span class="contextarea-context__section__input" id="title">{{props.info.duration}}</span>
             </div>
             <div class="contentarea-context__section">
                 <label class="contentarea-context__section__label" for="title">사용된 기술</label>
-                <span class="contextarea-context__section__input" id="title">여러가지</span>
+                <span class="contextarea-context__section__input" id="title">{{props.info.stack}}</span>
             </div>
             <div class="contentarea-context__section">
                 <label class="contentarea-context__section__label" for="title">느낀점</label>
-                <span class="contextarea-context__section__input" id="title"></span>
+                <span class="contextarea-context__section__input" id="title">{{props.info.context}}</span>
             </div>
         </div>
     </div>
 </template>
 <script setup>
-    import router from "@/router";
+    import { defineProps } from "vue";
+    const props = defineProps(["info"])
+    console.log(props.info);
+
 </script>
 <style lang="sass" scoped>
     .contentarea-context

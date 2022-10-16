@@ -17,6 +17,11 @@
                 <input type="text" v-model="state.stack" />
             </div>
             <div class="contentarea-context__section">
+                <label class="contentarea-context__section__label" for="title">프로젝트 프리뷰</label>
+                <input @change="imgSet" type="file" ref="img">
+                <img ref="prev" alt="preview" src="@/assets/prev.png" >
+            </div>
+            <div class="contentarea-context__section">
                 <label class="contentarea-context__section__label" for="title">느낀점</label>
                 <textarea v-model="state.context"></textarea>
             </div>
@@ -28,15 +33,27 @@
     import router from "@/router";
     import { reactive, ref } from "vue";
     import CheckModal from "@/components/CheckModal.vue";
-    
+    let formData = new FormData()
     let writeModal = ref(null);
     let state = reactive({
         title: "",
         duration: "",
         stack: "",
         context: "",
+        img:""
     });
-
+    let img = ref(null)
+    let prev = ref(null)
+    
+    function imgSet(){
+        let reader = new FileReader()
+        formData.append("upload", img.value.files[0])
+        state.img = img.value.files[0]
+        reader.readAsDataURL(img.value.files[0])
+        reader.onload=(e)=>{
+            prev.value.src = e.target.result
+        }
+    }
 
     function showModal(status) {
         writeModal.value.style.visibility = `${status}`;

@@ -1,13 +1,16 @@
 package kr.co.hyns.portfolio.entity;
 
 import java.nio.charset.Charset;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 
 import com.querydsl.core.annotations.PropertyType;
 import com.querydsl.core.annotations.QueryType;
@@ -22,7 +25,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class projectDetail {
+public class projectDetail extends DateEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pid;
@@ -40,6 +43,9 @@ public class projectDetail {
     @Column
     @QueryType(PropertyType.STRING)
     private byte[] context;
+
+    @OneToMany(mappedBy = "pDetail", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<projectImg> pImg;
 
     public String byteToString(byte[] context){
         return new String(context, Charset.forName("utf8"));

@@ -2,9 +2,11 @@ package kr.co.hyns.portfolio.controller;
 
 import java.io.File;
 import java.nio.file.Files;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,15 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import kr.co.hyns.portfolio.dto.projectDetailDTO;
 import kr.co.hyns.portfolio.service.ProjectDetailService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 
 @RestController
 @RequestMapping("/projects")
 @RequiredArgsConstructor
-@Log4j2
 public class ProjectDetailController {
     @Value("${kr.co.hyns.portfolio.password}")
     private String passwd;
@@ -36,11 +37,13 @@ public class ProjectDetailController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.POST, consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<projectDetailDTO>> projectList(Long pid){
-        return null;
+    public ResponseEntity<Page<projectDetailDTO>> projectLists(@RequestBody int page){
+        Pageable pageable = PageRequest.of(page, 18);
+        return new ResponseEntity<>(pdser.getList(pageable), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/img/{fileName}", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/img/{fileName}", method = RequestMethod.GET)
     public ResponseEntity<byte[]> projectImg(@PathVariable("fileName") String fileName){
         try {
             File imgFile = new File("/Users/hyunseokbyun/Documents/Imagefiles/" + File.separator + fileName);
@@ -52,8 +55,8 @@ public class ProjectDetailController {
         }
     }
 
-    @RequestMapping(value = "/write", method = RequestMethod.POST, consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Long> writeArticle(@RequestBody projectDetailDTO dto){
+    @RequestMapping(value = "/write", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Long> writeArticle(projectDetailDTO dto){
         Long result = pdser.writeArticle(dto);
         if (result>0){
             return new ResponseEntity<>(result, HttpStatus.OK);
@@ -64,7 +67,6 @@ public class ProjectDetailController {
 
 
     public ResponseEntity<Boolean> passchecking(String wpass){
-        log.info(wpass);
         if (passwd.equals(wpass.substring(0, wpass.length()-1))) {
             return new ResponseEntity<Boolean>(true, HttpStatus.OK);
         } else{
