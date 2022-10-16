@@ -10,7 +10,6 @@
     import CheckModal from "@/components/CheckModal.vue";
     import axios from 'axios';
     import { reactive } from 'vue'
-import router from "@/router";
 
     let state = reactive({
         projects:[],
@@ -28,10 +27,8 @@ import router from "@/router";
         }
         await axios.post("./api/projects/list", state.page, {headers}).then(function(res){
             state.projects.push(...res.data.content)
-            console.log(res.data);
             state.page = JSON.parse(JSON.stringify(res.data.number))+1
             state.totalPage = JSON.parse(JSON.stringify(res.data.totalPages))
-            console.log(state);
         })
     }
 

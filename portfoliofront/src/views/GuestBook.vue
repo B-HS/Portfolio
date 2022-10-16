@@ -110,7 +110,6 @@
         if (num >= tableState.size[0]) {
             return;
         }
-        console.log(num);
         axios.post("./api/list", num != null ? num : 1, { headers }).then(function (res) {
             tableState.info.push(...[...res.data.dtoList]);
             tableState.size = [];

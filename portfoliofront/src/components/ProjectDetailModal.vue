@@ -23,7 +23,6 @@
 <script setup>
     import { defineProps } from "vue";
     const props = defineProps(["info"])
-    console.log(props.info);
 
 </script>
 <style lang="sass" scoped>
