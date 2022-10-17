@@ -15,7 +15,7 @@
             </div>
             <div class="contentarea-context__section">
                 <label class="contentarea-context__section__label" for="title">느낀점</label>
-                <span class="contextarea-context__section__input" id="title">{{props.info.context}}</span>
+                <div class="contextarea-context__section__input" id="title" v-html="props.info.context"></div>
             </div>
         </div>
     </div>
@@ -28,27 +28,31 @@
 <style lang="sass" scoped>
     .contentarea-context
         display: block
-        width: 80%
+        width: 100%
+        height: 100%
         box-sizing: border-box
         span
             text-align: left
             cursor: pointer
 
         .contentarea-context__innerline
+            display: flex
+            flex-direction: column
             width: 100%
-            margin-top: 5rem
+            height: 95%
+            justify-content: space-between
             .contentarea-context__section
-                margin-top: 3rem
                 width: 100%
                 display: flex
-                text-align: center
+                text-align: left
                 justify-content: space-between
                 align-items: center
-                height: 3rem
-                gap: 2rem
                 .contentarea-context__section__label
-                    width: 10%
+                    width: 20%
                 .contextarea-context__section__input
                     text-align: left
                     width: 90%
+                &:nth-last-child(0)
+                    height: 100%
+                    
 </style>

@@ -1,8 +1,11 @@
 <template>
     <section class="contentarea-context__box" @click="viewDetail">
+        <div class="contentarea-context__box__hoverbox"  @click="DetailModal('visible')">
+            <h2> 프로젝트 설명 보기</h2>
+        </div>
         <h1 class="bi bi-layout-sidebar">&nbsp;{{props.detail.title}}</h1>
         <hr />
-        <div class="contentarea-context__box__img" @click="DetailModal('visible')">
+        <div class="contentarea-context__box__img">
             <img :src="'./api/projects/img/'+props.detail.pimage" alt="airreview" />
         </div>
         <div class="contentarea-context__box__modal" ref="detailModal" >
@@ -34,18 +37,33 @@
         border: 1px #777 solid
         box-sizing: border-box
         padding: 1rem
+        height: 100%
         width: 100%
+        position: relative
         hr
             margin: 0.75rem 0rem
         p
             line-height: 2rem
         h1
             cursor: pointer
-        
+        .contentarea-context__box__hoverbox
+            cursor: pointer
+            left: 0
+            top: 0
+            width: 100%
+            height: 100%
+            position: absolute
+            background-color: white
+            opacity: 0
+            transition: 0.25s ease-in-out all
+            display: flex
+            justify-content: center
+            align-items: center
+            color: black
+            &:hover
+                opacity: 0.85
     .contentarea-context__box__img
         cursor: pointer
-        img
-            width: 100%
     .contentarea-context__box__modal
         border: white 1px solid
         z-index: 20

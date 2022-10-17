@@ -14,7 +14,7 @@
                     <button @click="addBook()" src="#">입력</button>
                 </div>
                 <div class="guestbook-inputsection__functions">
-                    <input type="checkbox" name="open" v-model="body.open">
+                    <input type="checkbox" name="open" true-value="false" false-value="true" v-model="body.open">
                     <span>비밀글</span>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                     <button @click="addBook()">수정</button>
                 </div>
                 <div class="guestbook-inputsection__functions">
-                    <input type="checkbox" name="open" v-model="body.open">
+                    <input type="checkbox" name="open" v-model="body.open" value="true">
                     <span>비밀글</span>
                 </div>
             </div>
@@ -55,6 +55,10 @@
         "Content-Type": "application/json; charset=utf-8",
     };
 
+    function tmpchekcing(){
+        console.log(body.open);
+    }
+
     let area = ref(null);
 
     let tableState = reactive({
@@ -67,7 +71,7 @@
         username: null,
         password: null,
         context: null,
-        open:false,
+        open:true,
         fixmode: false,
     });
 
@@ -93,7 +97,6 @@
     }
 
     function addBook() {
-        body.open = !body.open
         axios.post("./api/add", body, { headers }).then(function (res) {
             body.username = "";
             body.password = "";
@@ -158,7 +161,7 @@
     }
 
     function windowSize() {
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+        if (window.innerHeight + window.scrollY == document.body.offsetHeight - 100) {
             tableState.currentPage[0] += 1;
             getBookList(tableState.currentPage[0]);
         }

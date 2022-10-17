@@ -2,7 +2,7 @@
     <div class="contentarea-context">
         <ProjectPreview v-for="info in state.projects" :key="info" :detail="info" ></ProjectPreview>
         <CheckModal :which="false"></CheckModal>
-
+        <div class="contentarea-context__infomsg">클릭으로 프로젝트 설명을 여실 수 있습니다</div>
     </div>
 </template>
 <script setup>
@@ -45,10 +45,17 @@
 </script>
 <style scoped lang="sass">
     .contentarea-context
+        position: relative
         display: grid
         grid-template-columns: repeat(auto-fit, minmax(400px, 1fr))
+        grid-auto-rows: repeat(auto-fit, minmax(500px, 1fr))
         justify-content: center
         gap: 1rem
-        width: 75%      
-        overflow: hidden !important          
+        width: 75%
+        overflow: hidden !important
+        .contentarea-context__infomsg
+            position: absolute
+            top: 0
+            left: 50%
+            transform: translateX(-50%)
 </style>
