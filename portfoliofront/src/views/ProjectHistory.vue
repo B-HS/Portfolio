@@ -25,7 +25,7 @@
         if (state.page>=state.totalPage) {
             return
         }
-        await axios.post("../api/projects/list", state.page, {headers}).then(function(res){
+        await axios.post("./api/projects/list", state.page, {headers}).then(function(res){
             state.projects.push(...res.data.content)
             state.page = JSON.parse(JSON.stringify(res.data.number))+1
             state.totalPage = JSON.parse(JSON.stringify(res.data.totalPages))

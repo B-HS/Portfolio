@@ -39,7 +39,7 @@
     let writeModal = ref(null);
     function write() {
         if(props.which){
-            axios.post("../api/projects/writecheck", state.passwd, { header }).then(function (res) {
+            axios.post("./api/projects/writecheck", state.passwd, { header }).then(function (res) {
                 let form = new FormData()
                 for (const key in props.articleInfo) {
                     if (Object.hasOwnProperty.call(props.articleInfo, key)) {
@@ -49,13 +49,13 @@
                 }  
                 console.log(form);
             if (res.data == true) {
-                axios.post("../api/projects/write", form, { headerForMulti }).then(function(res){
-                    res.data>0?router.push("../projects"):alert("글쓰기 실패")
+                axios.post("./api/projects/write", form, { headerForMulti }).then(function(res){
+                    res.data>0?router.push("/projects"):alert("글쓰기 실패")
                 })
             }
         });
         }else{
-            axios.post("../api/projects/writecheck", state.passwd, { header }).then(function (res) {
+            axios.post("./api/projects/writecheck", state.passwd, { header }).then(function (res) {
                 if (res.data == true) {
                     router.push("/write");
                 }

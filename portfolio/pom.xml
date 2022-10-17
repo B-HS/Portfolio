@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>kr.co.hyns</groupId>
 	<artifactId>portfolio</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>v2pf</version>
 	<name>portfolio</name>
-	<description>Demo project for Spring Boot</description>
+	<description>portfolio</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
