@@ -1,5 +1,5 @@
 # Portfolio
-> 포트폴리오 주소 : https://portfolio.hyns.co.kr/
+> 포트폴리오 주소 : https://portfolio.hyns.co.kr
 -----
 <img src="./portfoliofront/src/assets/portfolioimg.png">
 
