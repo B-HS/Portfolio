@@ -42,7 +42,7 @@
                     <span class="contentarea-context__collapse-context">
                         Spring boot를 이용하여 하기의 프로젝트의 백엔드를 완성하였습니다<br />
                         <a href="https://github.com/DS-Pirate/-AIRREVIEW"><i class="bi bi-paperclip"></i> 에어리뷰 :: 세상의 모든 리뷰</a><br />
-                        <a href="https://naver.com"><i class="bi bi-paperclip"></i> 현 포트폴리오 사이트</a>
+                        <a href="https://github.com/B-HS/Portfolio"><i class="bi bi-paperclip"></i> 현 포트폴리오 사이트</a>
                     </span>
                 </div>
                 <div ref="vue" class="contentarea-context__collapse" @click="collapse(1)">
@@ -57,7 +57,7 @@
                     <span class="contentarea-context__collapse-context">
                         Vue.js를 이용하여 하기의 프로젝트의 프론트를 완성하였습니다<br />
                         <a href="https://github.com/DS-Pirate/-AIRREVIEW"><i class="bi bi-paperclip"></i> 에어리뷰 :: 세상의 모든 리뷰</a><br />
-                        <a href="https://naver.com"><i class="bi bi-paperclip"></i> 포트폴리오 사이트</a>
+                        <a href="https://github.com/B-HS/Portfolio"><i class="bi bi-paperclip"></i> 포트폴리오 사이트</a>
                     </span>
                 </div>
                 <div ref="python" class="contentarea-context__collapse" @click="collapse(2)">
