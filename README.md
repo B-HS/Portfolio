@@ -1,5 +1,5 @@
 # Portfolio
-> 포트폴리오 주소 : https://portfolio.hyns.co.kr
+> 포트폴리오 주소 : https://hyns.co.kr
 -----
 > 간단한 포트폴리오 사이트입니다
 
